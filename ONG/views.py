@@ -50,3 +50,9 @@ def form_del_contacto(request, tel):
     contacto = Contacto.objects.get(telefono=tel)
     contacto.delete()
     return redirect(to="datos")
+    
+def perritos(request):
+    return render(request, "perritos.html")
+
+def gatitos(request):
+    return render (request, 'gatitos.html')
