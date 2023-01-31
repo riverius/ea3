@@ -11,7 +11,6 @@
 })();
 
 function valForm(){
-    console.log("Acceso establecido.");
     var vNom = $('#nombre').val();
     var vTel = $('#telefono').val();
     var vDir = $('#direccion').val();
