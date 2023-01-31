@@ -8,3 +8,9 @@ def mascotas(request):
 
 def contacto(request):
     return render(request, "contacto.html")
+
+def perritos(request):
+    return render(request, "perritos.html")
+
+def gatitos(request):
+    return render (request, 'gatitos.html')

@@ -3,9 +3,52 @@
 {% block title %} Pagina Principal {% endblock %}
 
 {% block body %}
+{% load static %}
 <div class="row">
     <div class="col-md-4 offset-md-4">
-        <h2>Pagina Mascotas</h2>
+        <h2>Mascotas en adopciòn</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <img alt="Bootstrap Image Preview" src="{% static '/img/gato.jpg' %}" width="290px">
+                </div>
+                <div class="col-md-6">
+                    <h3 style="font-size: 20px;">Adopta un gatito</h3>
+                    <p>Revisa nuestro catalogo de gatitos que buscan hogar</p>
+                    <a href="{% url 'gatitos' %}">
+                        <button type="button" class="btn btn-success">
+                            Ir
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <img alt="Bootstrap Image Preview" src="{% static '/img/perro.jpg' %}" width="290px">
+                </div>
+                <div class="col-md-6">
+                    <h3 style="font-size: 20px;">Adopta un perrito</h3>
+                    <p>Revisa nuestro catalogo de perritos que buscan hogar</p>
+                    <a href="{% url 'perritos' %}">
+                        <button type="button" class="btn btn-success">
+                            Ir
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+
+
+
+
     </div>
 </div>
 {% endblock %}
