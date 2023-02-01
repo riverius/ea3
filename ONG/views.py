@@ -93,3 +93,6 @@ def login_request(request):
 def salir(request):
     logout(request)
     return redirect('/')
+
+def hora(request):
+    return render (request, 'hora.html')
