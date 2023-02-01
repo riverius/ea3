@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import home, mascotas, contacto, form_del_contacto, form_mod_contacto, datos, form_contacto_ext, perritos, gatitos
+from .views import home, salir, mascotas, contacto, form_del_contacto, form_mod_contacto, datos, form_contacto_ext, perritos, gatitos, register_request, login_request
+
 
 urlpatterns = [
     path('', home,name='home'),
@@ -11,4 +12,7 @@ urlpatterns = [
     path('form-del-contacto/<tel>', form_del_contacto, name="form_del_contacto"),
     path('perritos/', perritos, name='perritos'),
     path('gatitos/', gatitos, name='gatitos'),
+    path("register", register_request, name="register"),
+    path("login", login_request, name="login"),
+    path("salir", salir, name= "salir"),
 ]

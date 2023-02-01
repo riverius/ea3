@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Contacto
-from .forms import ContactoForm
+from .forms import ContactoForm, NewUserForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
 
 def home(request):
@@ -13,7 +17,6 @@ def mascotas(request):
 
 def contacto(request):
     return render(request, "contacto.html")
-
 
 def datos(request):
     contactos = Contacto.objects.all()
@@ -50,9 +53,43 @@ def form_del_contacto(request, tel):
     contacto = Contacto.objects.get(telefono=tel)
     contacto.delete()
     return redirect(to="datos")
-    
+
 def perritos(request):
     return render(request, "perritos.html")
 
 def gatitos(request):
     return render (request, 'gatitos.html')
+
+def register_request(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Usuario registrado." )
+			return redirect(to="home")
+		messages.error(request, "Información inválida.")
+	form = NewUserForm()
+	return render (request=request, template_name="register.html", context={"register_form":form})
+
+def login_request(request):
+	if request.method == "POST":
+		form = AuthenticationForm(request, data=request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+			password = form.cleaned_data.get('password')
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				login(request, user)
+				messages.info(request, f"Has iniciado sesión como {username}.")
+				return redirect(to="home")
+			else:
+				messages.error(request,"Usuario o contraseña inválidos.")
+		else:
+			messages.error(request,"Usuario o contraseña inválidos.")
+	form = AuthenticationForm()
+	return render(request=request, template_name="login.html", context={"login_form":form})
+
+def salir(request):
+    logout(request)
+    return redirect('/')
